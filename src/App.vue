@@ -5,18 +5,26 @@
 </template>
 
 <script>
-import storage from './storage/index'
 export default {
-  name:"App",
-  mounted(){
-    // storage.setItem('yian',1);
-    // storage.setItem("mi",{yian:2},'user');
-    // storage.clearItem('yian');
-    storage.clearItem('mi','user');
+  name: "App",
+  data() {
+    return {
+      res: {}
+    };
+  },
+  mounted() {
+    // 本地加载请求静态json文件的形式
+    // this.axios.get('/mock/user/login.json').then((res)=>{
+    //   this.res=res;
+    // });
+
+    
+    this.axios.get('/user/login').then((res)=>{
+      this.res=res;
+    });
   }
-}
+};
 </script>
 
 <style>
-
 </style>
