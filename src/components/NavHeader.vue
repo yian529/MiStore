@@ -236,8 +236,7 @@ export default {
     getProductList(){
       this.axios.get('/products',{
         params:{
-          categoryId:'100012',
-          pageSize:6
+          categoryId:'100012'
         }
       }).then((res)=>{
         if(res.list.length>6){
@@ -343,6 +342,7 @@ export default {
             border-top: 1px solid #e5e5e5;
             box-shadow: 0px 7px 6px 0px rgba(0, 0, 0, 0.11);
             transition: height .5s;
+            background-color: $colorG;
             .product {
               position: relative;
               float: left;
