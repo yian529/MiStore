@@ -21,18 +21,19 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scope>
+@import './assets/scss/config.scss';
 .nav-footer{
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 234px;
-    border-top: 4px solid #FF6600;
-    color: #999999;
+    border-top: 4px solid $colorA;
+    color: $colorD;
     font-size: 16px;
     text-align: center;
-    background-color: #333333;
+    background-color: $colorB;
     .footer-logo{
         margin-top: 46px;
         margin-bottom: 15px;
@@ -46,7 +47,7 @@ export default {
         margin-bottom: 15px;
         a{
             text-decoration: none;
-            color: #999999;
+            color: $colorD;
         }
         span{
             margin: 0 10px;
@@ -54,7 +55,7 @@ export default {
     }
     .copyright{
         .mi-color{
-            color: #FF6600;
+            color: $colorA;
         }
     }
 }
