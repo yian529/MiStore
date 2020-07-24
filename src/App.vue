@@ -9,22 +9,11 @@ export default {
   name: "App",
   data() {
     return {
-      res: {}
     };
-  },
-  mounted() {
-    // 本地加载请求静态json文件的形式
-    // this.axios.get('/mock/user/login.json').then((res)=>{
-    //   this.res=res;
-    // });
-
-    
-    this.axios.get('/user/login').then((res)=>{
-      this.res=res;
-    });
   }
 };
 </script>
 
 <style>
+@import './assets/scss/reset.scss'
 </style>
