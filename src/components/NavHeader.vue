@@ -236,12 +236,17 @@ export default {
     getProductList(){
       this.axios.get('/products',{
         params:{
-          categoryId:'100012'
+          categoryId:'100012',
+          pageSize:6
         }
       }).then((res)=>{
-        if(res.list.length>6){
-          this.phoneList=res.list.slice(0,6);
-        }
+        // 前端进行设置的方法
+        // if(res.list.length>6){
+        //   this.phoneList=res.list.slice(0,6);
+        // }
+
+        // 后台对接好  可以通过pageSize控制分页的数量
+        this.phoneList=res.list;
       });
     },
     goToCart(){
