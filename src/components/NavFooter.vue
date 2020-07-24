@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style lang="scss" scope>
-@import './assets/scss/config.scss';
+@import '../assets/scss/config.scss';
 .nav-footer{
     position: fixed;
     bottom: 0;
