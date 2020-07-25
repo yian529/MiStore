@@ -1,6 +1,7 @@
 <template>
   <div class="index">
     <div class="container">
+      <!-- 轮播菜单 -->
       <div class="swiper-box">
         <!-- 导航菜单 -->
         <div class="nav-menu">
@@ -10,7 +11,7 @@
               <div class="children">
                 <ul v-for="(item,index) in menuList" :key="index">
                   <li v-for="(sub,i) in item" :key="i">
-                    <a :href="sub?'/#/product'+sub.id:''">
+                    <a :href="sub?'/#/product/'+sub.id:''">
                       <img :src="sub?sub.img:'/imgs/item-box-2.png'" />
                       {{sub?sub.name:'小米8青春版'}}
                     </a>
@@ -23,7 +24,7 @@
               <div class="children">
                 <ul v-for="(item,index) in menuList_second" :key="index">
                   <li v-for="(sub,i) in item" :key="i">
-                    <a :href="sub?'/#/product'+sub.id:''">
+                    <a :href="sub?'/#/product/'+sub.id:''">
                       <img :src="sub?sub.img:'/imgs/item-box-6.jpg'" />
                       {{sub?sub.name:'小米电视5 75英寸'}}
                     </a>
@@ -71,7 +72,7 @@
           <div class="swiper-button-next" slot="button-next"></div>
         </swiper>
       </div>
-      <div class="ads-box"></div>
+      <div class="ads-box"> </div>
       <div class="banner-box"></div>
       <div class="product-box"></div>
     </div>
