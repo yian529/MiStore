@@ -266,9 +266,10 @@ export default {
       this.axios.get('/products',{
         params:{
           categoryId:100012,
-          pageSize:8
+          pageSize:14
         }
       }).then((res)=>{
+        res.list=res.list.slice(6,14);
         this.phoneList=[res.list.slice(0,4),res.list.slice(4,8)];
       });
     }
@@ -423,7 +424,6 @@ export default {
               }
             }
             .list-item-img{
-              margin-top: 10px;
               img{
                 width: 190px;
                 height: 195px;
@@ -441,7 +441,7 @@ export default {
                 font-size: $fontK;
                 color: $colorD;
                 line-height: 13px;
-                margin: 6px auto 8px;
+                margin: 6px auto 13px;
               }
               .info-price{
                 font-size: $fontJ;
