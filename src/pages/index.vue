@@ -103,7 +103,7 @@
                 <div class="list-item-info">
                   <p class="info-name">{{sub.name}}</p>
                   <p class="info-describe">{{sub.subtitle}}</p>
-                  <p class="info-price">{{sub.price}}元</p>
+                  <p @click="addCart" class="info-price">{{sub.price}}元</p>
                 </div>
               </div>
             </div>
@@ -112,11 +112,19 @@
       </div>
     </div>
     <ServiceBar />
+    <!-- 在父组件定义一个submit事件（组件中不能用click进行事件绑定，需要用子组件传来的名称进行定义，即submit） -->
+    <Modal title="提示" btnType="3" modalType="middle" :showModal="showModal" v-on:submit="goToCart" v-on:cancel="showModal=false">
+      <!-- 插槽的用法：嵌套一个template模板，用v-slot定义插槽的名称（Modal.vue中的<slot name="body"></slot>） -->
+      <template v-slot:body>
+        <p>商品添加成功！</p>
+      </template>
+    </Modal>
   </div>
 </template>
 
 <script>
 import ServiceBar from "../components/ServiceBar";
+import Modal from "../components/Modal";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
 export default {
@@ -124,7 +132,8 @@ export default {
   components: {
     Swiper,
     SwiperSlide,
-    ServiceBar
+    ServiceBar,
+    Modal
   },
   data() {
     return {
@@ -255,23 +264,39 @@ export default {
         }
       ],
       // 手机商品功能的实现
-      phoneList: []
+      phoneList: [],
+      // Modal动画是否展示
+      showModal:false
     };
   },
-  mounted(){
+  mounted() {
     this.init();
   },
-  methods:{
-    init(){
-      this.axios.get('/products',{
-        params:{
-          categoryId:100012,
-          pageSize:14
-        }
-      }).then((res)=>{
-        res.list=res.list.slice(6,14);
-        this.phoneList=[res.list.slice(0,4),res.list.slice(4,8)];
-      });
+  methods: {
+    init() {
+      this.axios.get("/products", {
+          params: {
+            categoryId: 100012,
+            pageSize: 14
+          }
+        }).then(res => {
+          res.list = res.list.slice(6, 14);
+          this.phoneList = [res.list.slice(0, 4), res.list.slice(4, 8)];
+        });
+    },
+    // 添加至购物车
+    addCart(){
+      this.showModal=true;
+      // 调后台接口
+      // this.axios.post('/carts',{
+      //   productId:id,
+      //   selected: true
+      // }).then((res)=>{
+
+      // });
+    },
+    goToCart(){
+      this.$router.push('/cart');
     }
   }
 };
@@ -408,7 +433,7 @@ export default {
             &:nth-child(4n) {
               margin-right: 0;
             }
-            span{
+            span {
               display: inline-block;
               width: 67px;
               height: 24px;
@@ -416,41 +441,41 @@ export default {
               text-align: center;
               color: $colorG;
               // 可通过动态修改class，实现颜色的切换
-              &.new-pro{
-                background-color: #7ECF68;
+              &.new-pro {
+                background-color: #7ecf68;
               }
-              &.kill-pro{
-                background-color: #E82626;
+              &.kill-pro {
+                background-color: #e82626;
               }
             }
-            .list-item-img{
-              img{
+            .list-item-img {
+              img {
                 width: 190px;
                 height: 195px;
                 object-fit: cover;
               }
             }
-            .list-item-info{
-              .info-name{
+            .list-item-info {
+              .info-name {
                 font-size: $fontJ;
                 font-weight: bold;
                 color: $colorB;
                 line-height: $fontJ;
               }
-              .info-describe{
+              .info-describe {
                 font-size: $fontK;
                 color: $colorD;
                 line-height: 13px;
                 margin: 6px auto 13px;
               }
-              .info-price{
+              .info-price {
                 font-size: $fontJ;
                 font-weight: bold;
-                color: #F20A0A;
+                color: #f20a0a;
                 cursor: pointer;
-                &::after{
-                  content: ' ';
-                  @include bgImg(20px,20px,'/imgs/icon-cart-hover.png');
+                &::after {
+                  content: " ";
+                  @include bgImg(20px, 20px, "/imgs/icon-cart-hover.png");
                   margin-left: 8px;
                   vertical-align: middle;
                 }

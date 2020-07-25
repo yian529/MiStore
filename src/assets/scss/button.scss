@@ -1,34 +1,54 @@
 .btn{
   display: inline-block;
-  width:110px;
-  line-height: 30px;
   text-align: center;
-  background-color: $colorA;
-  color:$colorG;
-  border:none;
+  font-size: $fontI;
+  color: $colorG;
+  border: none;
   cursor: pointer;
+  background-color: $colorA;
+}
+.btn-gray{
+  background-color: #B0B0B0;
+}
+.btn-margin{
+  margin-right: 21px;
+  &:last-child{
+    margin-right: 0;
+  }
+}
+.btn-buy{
+  width: 110px;
+  line-height: 30px;
+}
+.btn-pay{
+  width: 130px;
+  line-height: 35px;
+}
+.btn-like{
+  width: 142px;
+  height: 54px;
 }
 .btn-default{
-  background-color: #B0B0B0;
-  color:$colorG;
+  width: 160px;
+  line-height: 40px;
 }
-.btn-large{
-  width:202px;
-  height: 50px;
-  line-height: 50px;
-  font-size:18px;
-}
-.btn-huge{
-  width:300px;
-  height: 54px;
+.btn-success{
+  width: 200px;
   line-height: 54px;
-  font-size:16px;
 }
-.btn-group{
-  .btn{
-    margin-right:20px;
-    &:last-child{
-      margin-right:0;
-    }
-  }
+.btn-account{
+  width: 202px;
+  line-height: 50px;
+}
+.btn-join{
+  width: 300px;
+  line-height: 54px;
+}
+.btn-request{
+  width: 332px;
+  line-height: 42px;
+}
+.btn-login{
+  width: 348px;
+  line-height: 50px;
 }
