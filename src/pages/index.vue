@@ -75,14 +75,41 @@
       <!-- 广告位 -->
       <div class="ads-box">
         <a :href="'/#/product/'+item.id" v-for="(item,index) in adsList" :key="index">
-          <img :src="item.img" alt="">
+          <img :src="item.img" alt />
         </a>
       </div>
       <div class="banner-box">
         <a href="'/#/product/30'">
-        <img src="/imgs/banner-1.png" alt=""></a>
+          <img src="/imgs/banner-1.png" alt />
+        </a>
       </div>
-      <div class="product-box"></div>
+    </div>
+    <div class="product-box">
+      <div class="container">
+        <span class="product-box-title">手机</span>
+        <div class="wrapper">
+          <div class="wrapper-left">
+            <a href="javascript:;">
+              <img src="/imgs/mix-alpha.jpg" alt />
+            </a>
+          </div>
+          <div class="wrapper-box">
+            <div class="wrapper-box-list" v-for="(item,index) in phoneList" :key="index">
+              <div class="list-item" v-for="(sub,i) in item" :key="i">
+                <span :class="{'new-pro':i%2==0}">新品</span>
+                <div class="list-item-img">
+                  <img :src="sub.mainImage" />
+                </div>
+                <div class="list-item-info">
+                  <p class="info-name">{{sub.name}}</p>
+                  <p class="info-describe">{{sub.subtitle}}</p>
+                  <p class="info-price">{{sub.price}}元</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <ServiceBar />
   </div>
@@ -209,22 +236,42 @@ export default {
         [0, 0, 0, 0]
       ],
       // 广告位功能的实现
-      adsList:[
+      adsList: [
         {
-          id:33,
-          img:'/imgs/ads/ads-1.png'
-        },{
-          id:48,
-          img:'/imgs/ads/ads-2.jpg'
-        },{
-          id:45,
-          img:'/imgs/ads/ads-3.png'
-        },{
-          id:347,
-          img:'/imgs/ads/ads-4.jpg'
+          id: 33,
+          img: "/imgs/ads/ads-1.png"
+        },
+        {
+          id: 48,
+          img: "/imgs/ads/ads-2.jpg"
+        },
+        {
+          id: 45,
+          img: "/imgs/ads/ads-3.png"
+        },
+        {
+          id: 347,
+          img: "/imgs/ads/ads-4.jpg"
         }
-      ]
+      ],
+      // 手机商品功能的实现
+      phoneList: []
     };
+  },
+  mounted(){
+    this.init();
+  },
+  methods:{
+    init(){
+      this.axios.get('/products',{
+        params:{
+          categoryId:100012,
+          pageSize:8
+        }
+      }).then((res)=>{
+        this.phoneList=[res.list.slice(0,4),res.list.slice(4,8)];
+      });
+    }
   }
 };
 </script>
@@ -280,8 +327,7 @@ export default {
             background-color: $colorG;
             border-top: 1px solid $colorH;
             ul {
-              display: flex;
-              justify-content: space-between;
+              @include flex();
               height: 75px;
               line-height: 75px;
               li {
@@ -316,17 +362,104 @@ export default {
       }
     }
   }
-  .ads-box{
+  .ads-box {
     @include flex();
     margin-top: 14px;
     margin-bottom: 31px;
-    a{
+    a {
       width: 296px;
       height: 167px;
     }
   }
-  .banner-box{
+  .banner-box {
     margin-bottom: 40px;
+  }
+  .product-box {
+    background-color: $colorJ;
+    padding: 30px auto 50px;
+    .product-box-title {
+      display: block;
+      font-size: $fontF;
+      color: $colorB;
+      padding: 30px 0;
+    }
+    .wrapper {
+      display: flex;
+      .wrapper-left {
+        margin-right: 16px;
+        width: 224px;
+        height: 619px;
+      }
+      .wrapper-box {
+        margin-bottom: 51px;
+        .wrapper-box-list {
+          @include flex();
+          margin-bottom: 15px;
+          &:last-child {
+            margin-bottom: 0;
+          }
+          .list-item {
+            width: 236px;
+            height: 302px;
+            background-color: $colorG;
+            margin-right: 14px;
+            text-align: center;
+            &:nth-child(4n) {
+              margin-right: 0;
+            }
+            span{
+              display: inline-block;
+              width: 67px;
+              height: 24px;
+              line-height: 24px;
+              text-align: center;
+              color: $colorG;
+              // 可通过动态修改class，实现颜色的切换
+              &.new-pro{
+                background-color: #7ECF68;
+              }
+              &.kill-pro{
+                background-color: #E82626;
+              }
+            }
+            .list-item-img{
+              margin-top: 10px;
+              img{
+                width: 190px;
+                height: 195px;
+                object-fit: cover;
+              }
+            }
+            .list-item-info{
+              .info-name{
+                font-size: $fontJ;
+                font-weight: bold;
+                color: $colorB;
+                line-height: $fontJ;
+              }
+              .info-describe{
+                font-size: $fontK;
+                color: $colorD;
+                line-height: 13px;
+                margin: 6px auto 8px;
+              }
+              .info-price{
+                font-size: $fontJ;
+                font-weight: bold;
+                color: #F20A0A;
+                cursor: pointer;
+                &::after{
+                  content: ' ';
+                  @include bgImg(20px,20px,'/imgs/icon-cart-hover.png');
+                  margin-left: 8px;
+                  vertical-align: middle;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 </style> 
