@@ -12,7 +12,7 @@
                 <ul v-for="(item,index) in menuList" :key="index">
                   <li v-for="(sub,i) in item" :key="i">
                     <a :href="sub?'/#/product/'+sub.id:''">
-                      <img :src="sub?sub.img:'/imgs/item-box-2.png'" />
+                      <img v-lazy="sub?sub.img:'/imgs/item-box-2.png'" />
                       {{sub?sub.name:'小米8青春版'}}
                     </a>
                   </li>
@@ -25,7 +25,7 @@
                 <ul v-for="(item,index) in menuList_second" :key="index">
                   <li v-for="(sub,i) in item" :key="i">
                     <a :href="sub?'/#/product/'+sub.id:''">
-                      <img :src="sub?sub.img:'/imgs/item-box-6.jpg'" />
+                      <img v-lazy="sub?sub.img:'/imgs/item-box-6.jpg'" />
                       {{sub?sub.name:'小米电视5 75英寸'}}
                     </a>
                   </li>
@@ -62,7 +62,7 @@
         <swiper ref="mySwiper" :options="swiperOptions">
           <swiper-slide v-for="(item,index) in slideList" :key="index">
             <a :href="'/#/product/'+item.id">
-              <img :src="item.img" />
+              <img v-lazy="item.img" />
             </a>
           </swiper-slide>
           <!-- 如果需要分页器 slot插槽 会自动往里面渲染分页器-->
@@ -75,12 +75,12 @@
       <!-- 广告位 -->
       <div class="ads-box">
         <a :href="'/#/product/'+item.id" v-for="(item,index) in adsList" :key="index">
-          <img :src="item.img" alt />
+          <img v-lazy="item.img" alt />
         </a>
       </div>
       <div class="banner-box">
         <a href="'/#/product/30'">
-          <img src="/imgs/banner-1.png" alt />
+          <img v-lazy="'/imgs/banner-1.png'" alt />
         </a>
       </div>
     </div>
@@ -90,7 +90,7 @@
         <div class="wrapper">
           <div class="wrapper-left">
             <a href="javascript:;">
-              <img src="/imgs/mix-alpha.jpg" alt />
+              <img v-lazy="'/imgs/mix-alpha.jpg'" alt />
             </a>
           </div>
           <div class="wrapper-box">
@@ -98,7 +98,7 @@
               <div class="list-item" v-for="(sub,i) in item" :key="i">
                 <span :class="{'new-pro':i%2==0}">新品</span>
                 <div class="list-item-img">
-                  <img :src="sub.mainImage" />
+                  <img v-lazy="sub.mainImage" />
                 </div>
                 <div class="list-item-info">
                   <p class="info-name">{{sub.name}}</p>
